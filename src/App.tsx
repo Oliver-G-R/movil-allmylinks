@@ -1,6 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { View, Text } from 'react-native';
 import { StackNavigation } from './components/StackNavigation'
 
 export default function App() {
