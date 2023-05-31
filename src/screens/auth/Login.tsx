@@ -1,11 +1,16 @@
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform, Image, ScrollView } from 'react-native';
-import { styleGlobal } from '../../../constants/stye';
-import { InputAuth } from '../components/InputAuth';
+import { StyleAuthScreens, styleGlobal } from '../../constants/stye';
+import { InputAuth } from './components/InputAuth';
 import {useState} from 'react'
-import { BtnAuth } from '../components/BtnAuth';
+import { BtnAuth } from './components/BtnAuth';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../types/NavigationType';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+interface LoginProps extends NativeStackScreenProps<RootStackParamList, 'Login'> {}
 
 
-export const Login = () => {
+export const Login = ({ navigation }:LoginProps) => {
 
   const [inputValues, setInputValues] = useState<{
     nickName: string,
@@ -15,38 +20,42 @@ export const Login = () => {
     password: ''
   })
 
+
+
   const handleChange = (name: string, value: any) => {
     setInputValues({...inputValues, [name]:value})
   }
   
   return (
     <SafeAreaView style={styleGlobal.container}>
-      <ScrollView contentContainerStyle={styleGlobal.container} showsVerticalScrollIndicator={false}>
+      <KeyboardAwareScrollView 
+        showsVerticalScrollIndicator={false}>
         <View style={{
           alignItems: 'center'
         }}>
           <Image
-            source={require('../../../assets/Account-amico.png')}
+            source={require('../../assets/Account-amico.png')}
             style={{
               width: 250,
               height: 250,
             }}/>
         </View>
   
-        <Text style={Style.title}>Hey, Login Now!</Text>
+        <Text style={StyleAuthScreens.title}>Hey, Login Now!</Text>
   
-        <View style={Style.contentText}>
-          <Text style={Style.text}>I am new user / </Text>
-          <TouchableOpacity activeOpacity={0.8}>
-            <Text style={Style.textBlack}>Create new account</Text> 
+        <View style={StyleAuthScreens.contentText}>
+          <Text style={StyleAuthScreens.text}>I am new user / </Text>
+          <TouchableOpacity 
+            onPress={() => navigation.navigate('SignUp')}
+            activeOpacity={0.8}>
+            <Text style={StyleAuthScreens.textBlack}>Create new account</Text> 
           </TouchableOpacity>
         </View>
   
-        <KeyboardAvoidingView
+        <View
           style={{
-            gap: 30
+            gap: 20
           }}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
           <InputAuth
             placeholder='Nick name or email'
@@ -60,15 +69,15 @@ export const Login = () => {
             onChangeText={text => handleChange('password', text)}
           />
   
-        </KeyboardAvoidingView>
-        <View style={Style.contentText}>
-          <Text style={Style.text}>Forgot your password? </Text>
+        </View>
+        <View style={StyleAuthScreens.contentText}>
+          <Text style={StyleAuthScreens.text}>Forgot your password? </Text>
           <TouchableOpacity activeOpacity={0.8}>
-            <Text style={Style.textBlack}>Reset Password</Text> 
+            <Text style={StyleAuthScreens.textBlack}>Reset Password</Text> 
           </TouchableOpacity>
         </View>
   
-        <View style={Style.containerBtn}>
+        <View style={StyleAuthScreens.containerBtn}>
           <BtnAuth 
             bckColor='rgb(17, 88, 132)' 
             text='Sign in'/>
@@ -77,38 +86,9 @@ export const Login = () => {
             bckColor='transparent' 
             text='Skip Now'/>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
     </SafeAreaView>
   )
 }
 
-const Style = StyleSheet.create({
-  title: {
-    fontSize: 34,
-    fontWeight: 'bold',
-    color: '#151515'
-  },
-  contentText: {
-    flexDirection: 'row',
-    marginVertical: 40,
-    alignItems: 'center',
-  },
-  text: {
-    color: '#575757',
-    fontSize: 20
-  },
-  textBlack:{
-    color: '#151515',
-    fontSize: 18
-
-  },
-  containerBtn:{
-    gap: 20
-  },
-  skipBtn: {
-    backgroundColor: 'transparent',
-
-  }
- 
-})

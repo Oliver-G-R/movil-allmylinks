@@ -1,18 +1,20 @@
-import { TextInput, StyleSheet } from 'react-native';
+import { TextInput, StyleSheet, KeyboardTypeOptions } from 'react-native';
 
 interface InputAuthProps {
   placeholder: string
   value: any
   secureTextEntry?: boolean
+  keyboardType?:  KeyboardTypeOptions
   onChangeText:  ((text: string) => void) | undefined
 }
 
-export const InputAuth = ({placeholder, value, secureTextEntry = false, onChangeText}: InputAuthProps) => {
+export const InputAuth = ({placeholder, value, secureTextEntry = false, keyboardType = 'default', onChangeText}: InputAuthProps) => {
   return (
     <TextInput
         value={value}
         style={Style.textInput}
         placeholder={placeholder}
+        keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
         onChangeText={onChangeText}
     />  
