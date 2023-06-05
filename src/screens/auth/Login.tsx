@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, KeyboardAvoidin
 import { StyleAuthScreens, styleGlobal } from '../../constants/stye';
 import { InputAuth } from './components/InputAuth';
 import {useState} from 'react'
-import { BtnAuth } from './components/BtnAuth';
+import { ButtonForm } from './components/BtnAuth';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types/NavigationType';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -72,16 +72,18 @@ export const Login = ({ navigation }:LoginProps) => {
         </View>
         <View style={StyleAuthScreens.contentText}>
           <Text style={StyleAuthScreens.text}>Forgot your password? </Text>
-          <TouchableOpacity activeOpacity={0.8}>
+          <TouchableOpacity 
+            onPress={() => navigation.navigate('ResetPassword')}
+            activeOpacity={0.8}>
             <Text style={StyleAuthScreens.textBlack}>Reset Password</Text> 
           </TouchableOpacity>
         </View>
   
         <View style={StyleAuthScreens.containerBtn}>
-          <BtnAuth 
+          <ButtonForm 
             bckColor='rgb(17, 88, 132)' 
             text='Sign in'/>
-          <BtnAuth 
+          <ButtonForm 
             textColor='rgb(17, 88, 132)'
             bckColor='transparent' 
             text='Skip Now'/>

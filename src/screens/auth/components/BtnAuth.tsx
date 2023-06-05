@@ -9,7 +9,7 @@ interface BtnAuthProps {
   customStyle?: StyleProp<ViewStyle>
 }
 
-export const BtnAuth = ({ onPress = () => {}, text, disabled, textColor = '#fff', bckColor = '#000', customStyle }:BtnAuthProps) => {
+export const ButtonForm = ({ onPress = () => {}, text, disabled, textColor = '#fff', bckColor = '#000', customStyle }:BtnAuthProps) => {
   return (
     <TouchableOpacity 
       activeOpacity={0.8} 

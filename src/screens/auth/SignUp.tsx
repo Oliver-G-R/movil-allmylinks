@@ -3,7 +3,7 @@ import { SafeAreaView, Text, View, Image} from 'react-native';
 import { StyleAuthScreens, styleGlobal } from '../../constants/stye';
 import { InputAuth } from './components/InputAuth'
 import { UserReggister } from '../../types/User'
-import { BtnAuth } from './components/BtnAuth';
+import { ButtonForm } from './components/BtnAuth';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types/NavigationType';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -80,14 +80,9 @@ export const SignUp = ({ navigation }:SignUpProps) => {
           onChangeText={text => handleChange('repeatPassword', text)}
         />
       <View style={StyleAuthScreens.containerBtn}>
-        <BtnAuth 
+        <ButtonForm 
           bckColor='rgb(17, 88, 132)' 
           text='Next'/>
-        <BtnAuth
-          onPress={() => navigation.goBack()}
-          textColor='rgb(17, 88, 132)'
-          bckColor='transparent' 
-          text='Back <-'/>
       </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>

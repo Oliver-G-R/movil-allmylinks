@@ -11,12 +11,12 @@ interface InputAuthProps {
 export const InputAuth = ({placeholder, value, secureTextEntry = false, keyboardType = 'default', onChangeText}: InputAuthProps) => {
   return (
     <TextInput
-        value={value}
-        style={Style.textInput}
-        placeholder={placeholder}
-        keyboardType={keyboardType}
-        secureTextEntry={secureTextEntry}
-        onChangeText={onChangeText}
+      value={value}
+      style={Style.textInput}
+      placeholder={placeholder}
+      keyboardType={keyboardType}
+      secureTextEntry={secureTextEntry}
+      onChangeText={onChangeText}
     />  
   )
 }
