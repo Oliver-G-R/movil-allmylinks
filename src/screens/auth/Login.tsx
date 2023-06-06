@@ -84,12 +84,12 @@ export const Login = ({ navigation }:LoginProps) => {
             bckColor='rgb(17, 88, 132)' 
             text='Sign in'/>
           <ButtonForm 
+            onPress={() => navigation.navigate("Home")}
             textColor='rgb(17, 88, 132)'
             bckColor='transparent' 
             text='Skip Now'/>
         </View>
       </KeyboardAwareScrollView>
-
     </SafeAreaView>
   )
 }
