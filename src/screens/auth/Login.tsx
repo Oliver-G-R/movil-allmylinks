@@ -6,19 +6,20 @@ import { ButtonForm } from './components/BtnAuth';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types/NavigationType';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { ISignIn } from '../../types/Auth';
+import { useValdateInputs } from '../../hooks/useValdateInputs';
 
 interface LoginProps extends NativeStackScreenProps<RootStackParamList, 'Login'> {}
 
 
 export const Login = ({ navigation }:LoginProps) => {
 
-  const [inputValues, setInputValues] = useState<{
-    nickName: string,
-    password: string
-  }>({
-    nickName: '',
+  const [inputValues, setInputValues] = useState<ISignIn>({
+    nickNameOrEmail: '',
     password: ''
   })
+
+  const {inputErrors, validateSignIn, handleErrors} = useValdateInputs<ISignIn>()
 
 
 
@@ -26,6 +27,14 @@ export const Login = ({ navigation }:LoginProps) => {
     setInputValues({...inputValues, [name]:value})
   }
   
+  const signIn = () => {
+    const isValid = validateSignIn(inputValues)
+
+    if(isValid){
+      //reggitser
+      console.log("Now Login.....")
+    }
+  }
   return (
     <SafeAreaView style={styleGlobal.container}>
       <KeyboardAwareScrollView 
@@ -54,15 +63,19 @@ export const Login = ({ navigation }:LoginProps) => {
   
         <View
           style={{
-            gap: 20
+          
           }}
         >
-          <InputAuth
+          <InputAuth 
+            onFocus={() => handleErrors("nickNameOrEmail", null) }
+            errorMessage={inputErrors.nickNameOrEmail}
             placeholder='Nick name or email'
-            value={inputValues.nickName}
-            onChangeText={text => handleChange('nickName', text)}
+            value={inputValues.nickNameOrEmail}
+            onChangeText={text => handleChange('nickNameOrEmail', text)}
           />
-          <InputAuth
+          <InputAuth 
+            onFocus={() => handleErrors("password", null) }
+            errorMessage={inputErrors.password}
             placeholder='Password'
             value={inputValues.password}
             secureTextEntry
@@ -81,6 +94,7 @@ export const Login = ({ navigation }:LoginProps) => {
   
         <View style={StyleAuthScreens.containerBtn}>
           <ButtonForm 
+            onPress={() => signIn()}
             bckColor='rgb(17, 88, 132)' 
             text='Sign in'/>
           <ButtonForm 

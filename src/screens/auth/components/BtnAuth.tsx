@@ -30,7 +30,7 @@ export const ButtonForm = ({ onPress = () => {}, text, disabled, textColor = '#f
 const Style = StyleSheet.create({
   btnAuth:{
     padding: 15,
-    borderRadius: 5
+    borderRadius: 5,
   },
   btnAuthText: {
     color: '#fff',
